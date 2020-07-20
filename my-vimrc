@@ -13,11 +13,19 @@ set bg=dark
 
 function! OutputPython()
   exe ":let @l = line('.')"
-  exe "normal! o print 'EAM log: line"
+  exe "normal! o print('EAM log: line"
   exe "normal! a " . getreg('l')
   exe "normal! a, " . getreg('"') . " = ' + " . getreg('"')
+  exe "normal! a)"
+endfunction
+
+function! RenumberPythonLogLine()
+  exe ":let @l = line('.')"
+  exe "normal! 0f,bcw"
+  exe "normal! a" . getreg('l')
 endfunction
 
 let @c = ':cal OutputPython()'
+let @r = ':cal RenumberPythonLogLine()'
 
 redir @a
