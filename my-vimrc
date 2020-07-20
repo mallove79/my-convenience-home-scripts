@@ -1,0 +1,26 @@
+set expandtab
+set sw=2 ts=2
+
+" FIXME: Dot ('.') character is part of vim words.  Let's change that.
+" set iskeyword=@,48-57,_,192-255,.,\.
+set wh=99
+set nu
+set ignorecase
+set foldmethod=indent
+set nostartofline
+
+
+function! OutputPython()
+  exe ":let @l = line('.')"
+  exe "normal! o print 'EAM log: line"
+  exe "normal! a " . getreg('l')
+  exe "normal! a, " . getreg('"') . " = ' + " . getreg('"')
+endfunction
+
+let @c = ':cal OutputPython()'
+
+" testvar
+print 'EAM log: line 33, testvar = ' + testvar
+
+redir @a
+
